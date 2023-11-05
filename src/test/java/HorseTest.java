@@ -2,10 +2,19 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockito.Mock;
+import org.mockito.MockedStatic;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Arrays;
+import java.util.stream.Stream;
+
 public class HorseTest {
+    public static Stream<String> blankStream()
+    {return Arrays.stream(new String[]{"", " ", "\t", "\n", "\t\n", " \t", " \n"});}
     //a
     @Test
     public void testConstructorWithNullParameterThrowsIllegalArgumentException()
@@ -21,13 +30,13 @@ public class HorseTest {
         Assertions.assertEquals(expected,actual);
     }
     @ParameterizedTest
-    @ValueSource(strings={""," ","\t","\n","\t\n"," \t"," \n"})
+    @MethodSource("blankStream")
 void testConstructorWithEmptyOrBlankNameThrowsIllegalArgumentException(String name)
     {
 Assertions.assertThrows(IllegalArgumentException.class,()->new Horse(name,1));
     }
     @ParameterizedTest
-    @ValueSource(strings={""," ","\t","\n","\t\n"," \t"," \n"})
+    @MethodSource("blankStream")
     void testMessageWithEmptyOrBlankNameWhenThrowsIllegalArgumentException(String name)
     {
         Throwable exception=Assertions.assertThrows(IllegalArgumentException.class,()->new Horse(name,1));
@@ -104,5 +113,34 @@ public void testMethodGetSpeedShouldReturnCorrectly(double speed)
 
 //e
 @ExtendWith(MockitoExtension.class)
-    public class Mockito
+@Test
+void testMoveMethodCallsGetRandomDouble() {
+    try (MockedStatic<Horse> horseMockedStatic = Mockito.mockStatic(Horse.class)) {
+        Horse horse = new Horse("Rocket", 10);
+        horse.move();
+        horseMockedStatic.verify(() -> Horse.getRandomDouble(0.2, 0.9));
+    }
+}
+@ParameterizedTest
+@ValueSource(doubles={0.3,0.5,0.9})
+
+void testGetRandomDoubleMethod(double randomValue)
+
+{Horse horse=new Horse("Rocket",4.0,10);
+
+try(MockedStatic<Horse> horseMockedStatic=Mockito.mockStatic(Horse.class))
+{horseMockedStatic.when(()->Horse.getRandomDouble(0.2,0.9)).thenReturn(randomValue);
+
+double expectedDistance=horse.getDistance()+horse.getSpeed()*randomValue;
+horse.move();
+double actualDistance=horse.getDistance();
+
+Assertions.assertEquals(actualDistance,expectedDistance);
+
+
+
+}
+
+
+}
 }
