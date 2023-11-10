@@ -5,9 +5,10 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class Main {
-    private static final Logger logger= LoggerFactory.getLogger(Main.class);
+    static Logger logger= LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) throws Exception {
+
         logger.debug("This is a debug message");
         logger.info("This is a info message");
         logger.error("This is a error message");
@@ -21,8 +22,8 @@ public class Main {
                 new Horse("Cherry", 3)
         );
         Hippodrome hippodrome = new Hippodrome(horses);
-logger.error("Hippodrome "+ hippodrome.toString()+"is created");
-        for (int i = 0; i < 100; i++) {
+logger.info("Начало скачек. Количество участников: "+hippodrome.getHorses().size());
+        for (int i = 0; i < 5; i++) {
             hippodrome.move();
             watch(hippodrome);
             TimeUnit.MILLISECONDS.sleep(200);
@@ -30,6 +31,7 @@ logger.error("Hippodrome "+ hippodrome.toString()+"is created");
 
         String winnerName = hippodrome.getWinner().getName();
         System.out.println(winnerName + " wins!");
+        logger.info("Окончание скачек. Победитель: "+winnerName);
     }
 
     private static void watch(Hippodrome hippodrome) throws Exception {

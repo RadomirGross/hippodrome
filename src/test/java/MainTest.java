@@ -9,6 +9,6 @@ public class MainTest {
     @Test
     @Timeout(value = 22,unit= TimeUnit.SECONDS)
     public void testMethodMain() throws Exception {
-        Main.main(new String[]{});
+        Main.main(null);
     }
 }

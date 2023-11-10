@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn">
+    <Properties>
+        <Property name="basePath">C:\Users\Gross\IdeaProjects\hippodrome</Property>
+    </Properties>
+
+    <Appenders>
+       <!-- <RollingFile name="EVENT_LOG_FILE" fileName="logs/hippodrome-${date:yyyy-MM-dd}.log"
+                     filePattern="logs/${logNamePrefix}_events-%d{yyyy-MM-dd}.log">-->
+        <RollingFile name="fileLogger"
+                     fileName="logs/hippodrome.${date:yyyy-MM-dd-mm}.log"
+                     filePattern="logs/hippodrome.${date:yyyy-MM-dd-mm}.log">
+            <PatternLayout>
+                <pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n
+                </pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+                <SizeBasedTriggeringPolicy size="10MB" />
+            </Policies>
+            <!-- Max 10 files will be created every day -->
+            <DefaultRolloverStrategy max="10">
+                <Delete basePath="logs" maxDepth="2">
+                    <!-- Delete all files older than 7 days -->
+                    <IfLastModified age="7d" />
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Root level="info" additivity="false">
+            <appender-ref ref="fileLogger" />
+        </Root>
+    </Loggers>
+</Configuration>

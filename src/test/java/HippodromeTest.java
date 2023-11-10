@@ -77,7 +77,7 @@ horses.add(horse2);
 horses.add(horse3);
         Hippodrome hippodrome=new Hippodrome(horses);
         Horse winner=hippodrome.getWinner();
-        Assertions.assertEquals(winner,horse3);
+        Assertions.assertSame(winner,horse3);
 
     }
     @Test
