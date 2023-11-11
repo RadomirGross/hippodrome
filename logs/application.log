@@ -1,0 +1,11 @@
+[INFO ] 2023-11-14 10:51:19.761 [main] Main - This is a info message
+[ERROR] 2023-11-14 10:51:19.768 [main] Main - This is a error message
+[INFO ] 2023-11-14 10:51:19.770 [main] Horse - Создание Horse, имяBucephalus, скорость 2.4
+[INFO ] 2023-11-14 10:51:19.771 [main] Horse - Создание Horse, имяAce of Spades, скорость 2.5
+[INFO ] 2023-11-14 10:51:19.771 [main] Horse - Создание Horse, имяZephyr, скорость 2.6
+[INFO ] 2023-11-14 10:51:19.771 [main] Horse - Создание Horse, имяBlaze, скорость 2.7
+[INFO ] 2023-11-14 10:51:19.771 [main] Horse - Создание Horse, имяLobster, скорость 2.8
+[INFO ] 2023-11-14 10:51:19.772 [main] Horse - Создание Horse, имяPegasus, скорость 2.9
+[INFO ] 2023-11-14 10:51:19.772 [main] Horse - Создание Horse, имяCherry, скорость 3.0
+[INFO ] 2023-11-14 10:51:19.773 [main] Main - Начало скачек. Количество участников: 7
+[INFO ] 2023-11-14 10:51:20.818 [main] Main - Окончание скачек. Победитель: Pegasus
